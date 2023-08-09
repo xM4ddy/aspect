@@ -64,7 +64,7 @@ fn get_values() -> (i32, i32) {
     loop {
         print!("Enter Height: ");
         let _ = io::stdout().flush();
-        io::stdin().read_line(&mut height).expect("Error Reading Width From STDIN");
+        io::stdin().read_line(&mut height).expect("Error Reading Height From STDIN");
         
         match height.trim().parse::<i32>() {
             Ok(_ok) => break,
