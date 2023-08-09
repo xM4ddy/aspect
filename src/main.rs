@@ -24,10 +24,10 @@ fn main() {
             }
         };
     }
-    else if args.len() == 2 && args[1].trim() == "-h" {
+    else if args.len() == 2 && args[1].trim() == "-help" {
         println!("Aspect, a small tool to calculate aspect ratios.\n");
         println!("Usage: aspect [-w (int)] [-h (int)]\n");
-        println!("Arguments:\n  -w    width as an int\n  -h    height as an int\n");
+        println!("Arguments:\n  -w      width as an int\n  -h      height as an int\n  -help   displays this message\n");
         return;
     }
     else if args.len() > 1 {
