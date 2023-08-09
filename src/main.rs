@@ -1,9 +1,13 @@
 use std::io::{self, Write};
 use num::integer::gcd;
 use std::env;
+use std::path::Path;
+use anyhow::Result;
+use image::io::Reader;
 
 fn main() {
-    let (width, height);
+    let width;
+    let height;
 
     let args: Vec<String> = env::args().collect();
 
@@ -24,10 +28,26 @@ fn main() {
             }
         };
     }
+    else if args.len() == 3 && args[1].trim() == "-img" {
+        match get_image_dimensions(args[2].trim()) {
+            Ok((w, h)) => {
+                width = w as i32;
+                height = h as i32;
+            }
+            Err(_e) => {
+                println!("Error Couldn't Get Image Dimensions");
+                return;
+            }
+        }
+    }
     else if args.len() == 2 && args[1].trim() == "-help" {
         println!("Aspect, a small tool to calculate aspect ratios.\n");
-        println!("Usage: aspect [-w (int)] [-h (int)]\n");
-        println!("Arguments:\n  -w      width as an int\n  -h      height as an int\n  -help   displays this message\n");
+        println!("Usage: aspect [-w (int)] [-h (int)] [-img (image path)]\n");
+        println!("Arguments:");
+        println!("  -w      width as an int");
+        println!("  -h      height as an int");
+        println!("  -img    image path");
+        println!("  -help   displays this message\n");
         return;
     }
     else if args.len() > 1 {
@@ -42,6 +62,13 @@ fn main() {
     println!("\nThe width is {}, and the height is {}, that gives an aspect ratio of {}:{}.",
         width, height, width / gcd(width, height), height / gcd(height, width));
 
+}
+
+fn get_image_dimensions(file_path: &str) -> Result<(u32, u32)> {
+    let path = Path::new(file_path);
+    let reader = Reader::open(path)?;
+    let dimensions = reader.into_dimensions()?;
+    Ok(dimensions)
 }
 
 fn get_values() -> (i32, i32) {

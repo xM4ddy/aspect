@@ -9,6 +9,8 @@ aspect [-w (int)] [-h (int)]
   -w &emsp;&emsp; width as an int
   
   -h &emsp;&emsp; height as an int
+
+  -img &emsp;&emsp; image path
   
   -help &emsp; displays help message
   
