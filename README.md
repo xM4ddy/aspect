@@ -2,7 +2,7 @@
 A small tool to calculate aspect ratios (mostly just me learning some rust).
 
 # Usage:
-aspect [-w (int)] [-h (int)]
+aspect [-w (int)] [-h (int)] [-img (image path)]
 
 # Arguments:
 
